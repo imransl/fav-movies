@@ -6,7 +6,7 @@ You've created a new ASP.NET Core project. [Learn what's new](https://go.microso
 
 
 
-## This application consists of:
+## This application consists of::
 
 *   Sample pages using ASP.NET Core MVC
 *   [Bower](https://go.microsoft.com/fwlink/?LinkId=518004) for managing client-side libraries
