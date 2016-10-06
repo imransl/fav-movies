@@ -1,0 +1,41 @@
+<h2>Movies</h2>
+
+<section>
+  <ul>
+    <li *ngFor="let movie of movieList$ | async">
+      <div>ID: {{movie.id}}</div>
+      <div>Title: {{movie.title}}</div>
+      <div>Director: {{movie.director}}</div>
+      <div>Year: {{movie.year}}</div>
+      <div>Language: {{movie.language}}</div>
+    </li>
+  </ul>
+</section>
+
+<h4>Add Movie</h4>
+
+<form (submit)="addMovie()">
+  <p>
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" [(ngModel)]="title">
+  </p>
+
+  <p>
+    <label for="director">Director</label>
+    <input type="text" name="director" id="director" [(ngModel)]="director">
+  </p>
+
+  <p>
+    <label for="year">Year</label>
+    <input type="text" name="year" id="year" [(ngModel)]="year">
+  </p>
+
+  <p>
+    <label for="language">Language</label>
+    <input type="text" name="language" id="language" [(ngModel)]="language">
+  </p>
+
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+</form>

@@ -55,7 +55,6 @@ namespace movieStore
 
             app.UseStaticFiles();
 
-
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
