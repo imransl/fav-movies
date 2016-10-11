@@ -1,0 +1,6 @@
+obj/
+bin/
+Migrations/
+.vscode/
+node_modules/
+wwwroot/
