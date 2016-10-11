@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using movieStore.Models;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace movieStore
 {
@@ -27,6 +31,17 @@ namespace movieStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+             var optionsBuilder = new DbContextOptionsBuilder<MovieDbContext>();
+             optionsBuilder.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+
+             var context = new MovieDbContext(optionsBuilder.Options);
+             context.Database.EnsureCreated();
+
+            services.AddDbContext<MovieDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
             // Add framework services.
             services.AddMvc();
         }
@@ -34,6 +49,21 @@ namespace movieStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+
+              app.Use(async (context, next) =>
+            {
+                await next();
+
+                if (context.Response.StatusCode == 404
+                    && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+
+            app.UseStaticFiles();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
