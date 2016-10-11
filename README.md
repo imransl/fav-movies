@@ -5,6 +5,7 @@ demo Application!!
 ## Point the service application to SQL Server database
 
 Go to appsettings.json file and uncomment the correct connectionstring, 
+
 "DefaultConnection" : "Data Source = .; Initial Catalog = movieDB; Integrated Security = true"
 
 Go to startup.cs class and uncomment the sql db context,
@@ -25,6 +26,7 @@ Press ctrl+F5 to start the server
 ## Point the service application to MY SQl Server in Ubuntu
 
 Go to appsettings.json file and uncomment the correct connectionstring, 
+
  "DefaultConnection" : "server = localhost; database = movieDB; uid = root; password = hansamali; sslmode = none"
  
 Go to startup.cs class and uncomment the sql db context,
