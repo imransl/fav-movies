@@ -29,7 +29,7 @@ Go to appsettings.json file and uncomment the correct connectionstring,
 
  "DefaultConnection" : "server = localhost; database = movieDB; uid = root; password = hansamali; sslmode = none"
  
-Go to startup.cs class and uncomment the sql db context,
+Go to startup.cs class and uncomment the my sql db context,
 
   var optionsBuilder = new DbContextOptionsBuilder<MovieDbContext>();
   optionsBuilder.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
